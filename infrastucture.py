@@ -6,7 +6,20 @@ from individual import *
 # Example usage
 chromosome_classes = {
     'Chromosome': Chromosome,
-    'FeatureChromo': FeatureChromo,
+    'FeatureChromo11': FeatureChromo11,
+    'FeatureChromoAB': FeatureChromoAB,
+    'FeatureChromoCD': FeatureChromoCD,
+    'FeatureChromoEF': FeatureChromoEF,
+    'FeatureChromoGH': FeatureChromoGH,
+    'FeatureChromoIJ': FeatureChromoIJ,
+    'FeatureChromoKL': FeatureChromoKL,
+    'FeatureChromoMN': FeatureChromoMN,
+    'FeatureChromoOP': FeatureChromoOP,
+    'FeatureChromoQR': FeatureChromoQR,
+    'FeatureChromoST': FeatureChromoST,
+    'FeatureChromoUV': FeatureChromoUV,
+    'FeatureChromoWX': FeatureChromoWX,
+    'FeatureChromoYZ': FeatureChromoYZ,
     'QualityChromo': QualityChromo,
     'SizeChromo': SizeChromo,
 }
@@ -49,36 +62,38 @@ def submit_job(expression, folder, filename):
         req = request.Request(f'http://{url}:8188/prompt', data=wf)
         res = request.urlopen(req)
         return res
-    wflag, hflag = (False, False)
-    if 'large_width' in expression:
-        wflag = True
-        expression = expression.replace('large_width', '')
-    if 'large_height' in expression:
-        hflag = True
-        expression = expression.replace('large_height', '')
+    
+    width, height = (832, 832)
+    if 'meta_bigsquare' in expression:
+        width, height = (1024, 1024)
+        expression = expression.replace('meta_bigsquare', '')
+    elif 'meta_portrait' in expression:
+        width, height = (832, 1216)
+        expression = expression.replace('meta_portrait', '')
+    elif 'meta_landscape' in expression:
+        width, height = (1216, 832)
+        expression = expression.replace('meta_landscape', '')
+    elif 'meta_square' in expression:
+        width, height = (512, 512)
+        expression = expression.replace('meta_square', '')
+    
     while ', ,' in expression:
         expression = expression.replace(', ,', ',')
-    expression = expression.replace(',,', ',')
-    if wflag and hflag:
-        width, height = (1024, 1024)
-    elif wflag:
-        width, height = (1216, 832)
-    elif hflag:
-        width, height = (832, 1216)
-    else:
-        width, height = (512, 512)
+
     with open('breed_diffusion.api.json', 'rt', encoding = 'utf-8') as fh:
         workflow_object = json.load(fh)
+
     workflow_object['326']['inputs']['empty_latent_width'] = width
     workflow_object['326']['inputs']['empty_latent_height'] = height
     workflow_object['621']['inputs']['text'] = expression
     workflow_object['624']['inputs']['path'] = folder
     workflow_object['624']['inputs']['filename'] = filename
+
     wrapped_workflow = {'prompt': workflow_object}
     wrapped_string = json.dumps(wrapped_workflow).encode('utf-8')
     submit_workflow(wrapped_string)
 
-def boot_population():
+def boot_population(bf = 'initial.json'):
     bulk = """1girl, solo, looking_at_viewer, smile, short_hair, open_mouth, shirt, long_sleeves, brown_eyes, standing, white_shirt, pink_hair, flower, :d, cowboy_shot, outdoors, sky, teeth, pants, hand_up, denim, arm_behind_back, sunset, hand_in_pocket, waving, overalls, field
 1girl, solo, long_hair, breasts, looking_at_viewer, blush, smile, large_breasts, shirt, red_eyes, holding, cleavage, jewelry, collarbone, white_shirt, pink_hair, purple_hair, multicolored_hair, cowboy_shot, earrings, glasses, collared_shirt, pants, necklace, nail_polish, mole, vest, covered_nipples, two-tone_hair, fur_trim, thigh_gap, black_pants, staff, black_vest, holding_staff, amulet
 1girl, solo, breasts, looking_at_viewer, short_hair, large_breasts, shirt, cleavage, jewelry, collarbone, yellow_eyes, upper_body, red_hair, earrings, choker, black_shirt, makeup, blurry_background, piercing, ear_piercing, red_lips, mechanical_arms, cyborg, single_mechanical_arm, prosthesis, prosthetic_arm
@@ -96,15 +111,24 @@ grey_background, gradient, military, gradient_background, no_humans, robot, grou
     sizp = SizeChromo({'large_height'})
     sizl = SizeChromo({'large_width'})
 
-    for i in range(9):
+    for i in range(10):
+        feat_set = set(bulk[i].split(', '))
         ind = Individual()
         ind.add_chromosome(qual)
-        ind.add_chromosome(sizs)
-        ind.add_chromosome(FeatureChromo(set(bulk[i].split(', '))))
+        ind.add_chromosome(sizs if i != 9 else sizl)
+        ind.add_chromosome(FeatureChromo11(feat_set))
+        ind.add_chromosome(FeatureChromoAB(feat_set))
+        ind.add_chromosome(FeatureChromoCD(feat_set))
+        ind.add_chromosome(FeatureChromoEF(feat_set))
+        ind.add_chromosome(FeatureChromoGH(feat_set))
+        ind.add_chromosome(FeatureChromoIJ(feat_set))
+        ind.add_chromosome(FeatureChromoKL(feat_set))
+        ind.add_chromosome(FeatureChromoMN(feat_set))
+        ind.add_chromosome(FeatureChromoOP(feat_set))
+        ind.add_chromosome(FeatureChromoQR(feat_set))
+        ind.add_chromosome(FeatureChromoST(feat_set))
+        ind.add_chromosome(FeatureChromoUV(feat_set))
+        ind.add_chromosome(FeatureChromoWX(feat_set))
+        ind.add_chromosome(FeatureChromoYZ(feat_set))
         initial_population.append(ind)
-    ind = Individual()
-    ind.add_chromosome(qual)
-    ind.add_chromosome(sizl)
-    ind.add_chromosome(FeatureChromo(set(bulk[9].split(', '))))
-    initial_population.append(ind)
-    serialize_individuals(initial_population, 'initial.json')
+    serialize_individuals(initial_population, bf)

@@ -21,12 +21,16 @@ class Chromosome:
         for gene_set in self.genes:
             for allele in self.known_alleles:
                 if random.random() < probability:
-                    had_mutation = True
+                    if had_mutation == False:
+                        had_mutation = []
                     # Flip the presence or absence of the allele
                     if allele in gene_set:
+                        mutation_record = (type(self).__name__, self.genes.index(gene_set), allele, 'off')
                         gene_set.remove(allele)
                     else:
                         gene_set.add(allele)
+                        mutation_record = (type(self).__name__, self.genes.index(gene_set), allele, 'on')
+                    had_mutation.append(mutation_record)
         return had_mutation
 
     def express(self, perturbation=0.0):

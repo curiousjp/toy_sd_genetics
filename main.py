@@ -33,19 +33,18 @@ def breed_new_generation(individuals, winners = None, mutation_rate = 0.0000075,
 # !! individual 1b733fff-4a03-4614-aa05-82cdf4353633 underwent mutation on chromosome 6!
 # !! individual 4d40ae75-65f6-4722-ab7a-e384703788ac underwent mutation on chromosome 9!
 
-gen002_winners = [
-    '1a219c70-dc63-4541-8245-fd6947092545',
-    '3bc040f4-b1f2-4a4d-b488-809ee198146b',
-    '504b4763-0389-46c2-9594-c5131458f628',
-    '644931eb-2867-4d8e-89b5-7c2ea2d3ad76',
-    '53358778-94f7-4509-950b-d8a93b4b7b76',
-    'a9b32fd4-bb20-48c8-87ac-bea4c79dfabd',
-    'afdfe092-51ea-4951-a25c-453350b6de2c',
-    'c5b601de-4765-4e89-bfb3-9fdf384f2fbc',
-    'cbc05d8c-d7d2-41f8-a62c-559b33284e5e',
-    '3a6f89a8-dfc9-4aa6-b0b9-f92dced60d11',
-]
-
+# gen002_winners = [
+#     '1a219c70-dc63-4541-8245-fd6947092545',
+#     '3bc040f4-b1f2-4a4d-b488-809ee198146b',
+#     '504b4763-0389-46c2-9594-c5131458f628',
+#     '644931eb-2867-4d8e-89b5-7c2ea2d3ad76',
+#     '53358778-94f7-4509-950b-d8a93b4b7b76',
+#     'a9b32fd4-bb20-48c8-87ac-bea4c79dfabd',
+#     'afdfe092-51ea-4951-a25c-453350b6de2c',
+#     'c5b601de-4765-4e89-bfb3-9fdf384f2fbc',
+#     'cbc05d8c-d7d2-41f8-a62c-559b33284e5e',
+#     '3a6f89a8-dfc9-4aa6-b0b9-f92dced60d11',
+# ]
 # gen002 = unserialize_individuals('gen002.json', chromosome_classes)
 # new_population = breed_new_generation(gen002, winners = gen002_winners, target_population_size = 100)
 # serialize_individuals(new_population, 'gen003.json')
@@ -65,22 +64,21 @@ gen002_winners = [
 # !! individual 0761e736-8e0e-4adc-b5d0-bf83e8c9169a underwent mutation on chromosome 5!
 # !! individual d394caee-fb3c-4133-aa96-cb4f53a6ea5f underwent mutation on chromosome 3!
 
-gen003_winners = [
-    '9165346c-b953-45a9-be4f-d297640fd95b',
-    'a2901486-8d27-418c-96f3-2570f0aacee4',
-    '89a17593-5693-46a9-b059-cabf0794fe8d',
-    'cbaa3ae8-a55a-43aa-aa2d-526a841c0178',
-    '4c6fb70d-a0f1-4556-aa73-b1c09111ffbd',
-    '068c507a-12d5-4ec0-a6ce-b9e157c8149f',
-    '5f4c71e4-9df1-4d38-bbcc-86ead35f8004',
-    '5a703b13-7985-4b99-a4c7-21b343ee4aa9',
-    '07ff9dac-27f3-41fa-b25c-1dd5682f112a',
-    '162bcc35-54c5-4ec5-b9df-12b78d075691',
-]
-
-gen003 = unserialize_individuals('gen003.json', chromosome_classes)
-new_population = breed_new_generation(gen003, winners = gen003_winners, target_population_size = 100)
-serialize_individuals(new_population, 'gen004.json')
+# gen003_winners = [
+#     '9165346c-b953-45a9-be4f-d297640fd95b',
+#     'a2901486-8d27-418c-96f3-2570f0aacee4',
+#     '89a17593-5693-46a9-b059-cabf0794fe8d',
+#     'cbaa3ae8-a55a-43aa-aa2d-526a841c0178',
+#     '4c6fb70d-a0f1-4556-aa73-b1c09111ffbd',
+#     '068c507a-12d5-4ec0-a6ce-b9e157c8149f',
+#     '5f4c71e4-9df1-4d38-bbcc-86ead35f8004',
+#     '5a703b13-7985-4b99-a4c7-21b343ee4aa9',
+#     '07ff9dac-27f3-41fa-b25c-1dd5682f112a',
+#     '162bcc35-54c5-4ec5-b9df-12b78d075691',
+# ]
+# gen003 = unserialize_individuals('gen003.json', chromosome_classes)
+# new_population = breed_new_generation(gen003, winners = gen003_winners, target_population_size = 100)
+# serialize_individuals(new_population, 'gen004.json')
 
 # PS C:\Users\curious\Documents\GitHub\breed_diffusion> python .\main.py
 # !! individual 0a5ab083-039f-47c3-b232-140d8dd56233 underwent mutation on chromosome 4!
@@ -111,9 +109,23 @@ serialize_individuals(new_population, 'gen004.json')
 # !! individual cb09eca7-bc12-49c9-ad9c-27d4ea307ca9 underwent mutation on chromosome 4!
 #    [('FeatureChromoCD', 1, 'dyed_bangs', 'on')]
 
-#destination = 'Z:\\programming\\sd_projects\\breed_diffusion\\exp_0002\\gen002\\'
-#destination = 'Z:\\programming\\sd_projects\\breed_diffusion\\exp_0002\\gen003\\'
-destination = 'Z:\\programming\\sd_projects\\breed_diffusion\\exp_0002\\gen004\\'
+gen004_winners = [
+    '2cc8aa98-dbe6-405f-8eb9-45d776f3a407', 
+    'bf2377dc-5942-419c-9a4b-1190035b7449', 
+    '523e3faf-abf1-456f-aa01-c5d5579559ce', 
+    '607cbbc1-7430-46ee-951d-3968bb2a8e38', 
+    '1448a415-8351-4f72-82ae-26709a244de3', 
+    '2b64af1f-7456-4dd0-81e7-b66b8442822c', 
+    '309aa1c6-756f-4669-8a03-494dcc9d4dde', 
+    '697b466a-234d-48ad-97a2-221817277b60', 
+    '6ee58d00-19d6-46b4-b7aa-43e63a38ee0b', 
+    '8c9b1cc1-aaff-4e6f-9593-03bfd6941c66', 
+]
+gen004 = unserialize_individuals('gen004.json', chromosome_classes)
+new_population = breed_new_generation(gen004, winners = gen004_winners, target_population_size = 100)
+serialize_individuals(new_population, 'gen005.json')
+
+destination = 'Z:\\programming\\sd_projects\\breed_diffusion\\exp_0002\\gen005\\'
 for i, individual in enumerate(new_population):
     expression = individual.express()
     submit_job(expression, destination, individual.name)

@@ -58,8 +58,8 @@ def unserialize_individuals(file_name, chromosome_classes):
         return [dict_to_individual(ind_data) for ind_data in individuals_data]
 
 def submit_job(expression, folder, filename):
-    def submit_workflow(wf, url='127.0.0.1'):
-        req = request.Request(f'http://{url}:8188/prompt', data=wf)
+    def submit_workflow(wf, url='127.0.0.1', port = 8188):
+        req = request.Request(f'http://{url}:{port}/prompt', data=wf)
         res = request.urlopen(req)
         return res
     

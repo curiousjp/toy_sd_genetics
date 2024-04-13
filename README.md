@@ -8,10 +8,14 @@
  We thought it would be fun to experiment with this analogy by constructing a simplified genetics model, performing "DNA Profiling" on some existing images, and then using them to generate more. You can use the code in this repository to do the same with your own images too. It's fun to watch the images change over the generations, and it can be thought-provoking too (in a kind of low stakes way).
 # some results
  Before we get underway, here's an example of an image we generated, along with its family tree.
- 
- A cool feature - the keyboard visible in the top image and its immediate ancestor to the left was a random mutation that was lucky enough to be both expressed and then propagated.
+
+![stack](https://github.com/curiousjp/toy_sd_genetics/assets/48515264/effad106-b27b-4798-b5ff-d7b82528b4be)
+
+  A cool feature - the keyboard visible in the top image and its immediate ancestor to the left was a random mutation that was lucky enough to be both expressed and then propagated.
 # how does it work?
- We have a very simplified model for genetics which is an analogy rather than a simulation of real biology. An individual has one or more 'chromosomes' in a 'genome'. Each chromosome has a number of loci on it, representing 'alleles' and each of these represent a single tag.* Individuals can have multiple copies of each chromosome - most will have two of each.
+ We have a very simplified model for genetics which is an analogy rather than a simulation of real biology. An individual has one or more 'chromosomes' in a 'genome'. Each chromosome has a number of loci on it, representing 'alleles' and each of these represent a single tag. (The chromosome representing the image dimensions works slightly differently - it has two alleles that are then combined into one expressed tag, which is then extracted during submission and used to set workflow parameters.) 
+ 
+ Individuals can have multiple copies of each chromosome - most will have two of each.
  
  When it's time to convert the Individual's genome into a prompt that can be given to the image model, each chromosome is 'expressed'. Combining the expressions of each chromosome results in the prompt. When a chromosome is expressed, we look at each loci and randomly determine whether it takes part in the expression - the chance that it does is proportional to the number of copies of the chromosome that have that loci switched on. This is very different to real heritability, where there are patterns of dominance and recessivity, and where individual traits can be driven by groups of genes.
 
@@ -62,7 +66,7 @@ You'll return to _main.py_ after each generation, adjusting the parameters and r
 
 # what could we have done better?
 ## making a better genome
-Models like `moat-v2` know very large numbers of tags. I ended up separating them into feature chromosomes alphabetically, with each one being responsible for two letters of the alphabet and each tag that started with one of those two letters. But this gives very unrealistic behaviour - the alleles for the tag 'red_eyes' and 'blue_eyes' are on entirely different chromosomes, even though they are functionally controlling the same trait.  Having large numbers of unrelated traits on a single chromosome also means that they tend to be inherited together as a package, which can be a bit boring.
+Models like `moat-v2` know very large numbers of tags. I ended up separating them into feature chromosomes alphabetically, with each one being responsible for two letters of the alphabet and each tag that started with one of those two letters. (Note, I also edited the list of known tags to try and remove anything likely to produce overtly sexual or disturbing content, but there's a chance that I might have missed something that could be mutated back in - watch your mutation log carefully if this is something you want to avoid.) But this distribution of tags to chromosomes gives very unrealistic behaviour - the alleles for the tag 'red_eyes' and 'blue_eyes' are on entirely different chromosomes, even though they are functionally controlling the same trait.  Having large numbers of unrelated traits on a single chromosome also means that they tend to be inherited together as a package, which can be a bit boring.
 
 A hand-picked genome could do better in this space. A better model could use multiple genes to represent a single expressed trait (see the size chromosome for an example of this) or implement dominance / recessivity. Chromosomes could also be written to control other workflow features like LoRA.
 ## selection

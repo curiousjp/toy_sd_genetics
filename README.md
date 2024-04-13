@@ -7,7 +7,7 @@
 
  We thought it would be fun to experiment with this analogy by constructing a simplified genetics model, performing "DNA Profiling" on some existing images, and then using them to generate more. You can use the code in this repository to do the same with your own images too. It's fun to watch the images change over the generations, and it can be thought-provoking too (in a kind of low stakes way).
 # some results
- Before we get underway, here's an example of an image we generated, along with its family tree.
+ Before we get underway, here's an example of an image we generated, along with its family tree. The expression that generated this image was: `score_5, score_8, rating_safe, score_4, score_9, score_7, score_6, 1boy, 1other, breasts, blush, caterpillar_tracks, fingernails, earrings, ground_vehicle, halloween_costume, green_hair, gradient, gradient_background, jewelry, keyboard_\(computer\), long_sleeves, nail_polish, pink_hair, pants, open_book, red_eyes, science_fiction, standing, short_hair, teeth, sunset, solo, tank, smile, turret, vehicle_focus, vest, weapon, `
 
 ![stack](https://github.com/curiousjp/toy_sd_genetics/assets/48515264/effad106-b27b-4798-b5ff-d7b82528b4be)
 

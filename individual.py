@@ -59,11 +59,11 @@ class Individual:
     @classmethod
     def breed_population(cls, individuals, target_population_size):
         new_population = []
+        # I found this was producing too much of a winner-takes-all situation, but
+        # I am committed for this run. you may want to consider using the provided 
+        # softmax function instead, something like softmax(len(individuals), temperature = 6.0)
+        weights=[1/(i+1) for i in range(len(individuals))]
         while len(new_population) < target_population_size:
-            # I found this was producing too much of a winner-takes-all situation, but
-            # I am committed for this run. you may want to consider using the provided 
-            # softmax function instead, something like softmax(len(individuals), temperature = 6.0)
-            weights=[1/(i+1) for i in range(len(individuals))]
             parents = random.choices(individuals, k=2, weights=weights)
             if parents[0] != parents[1]:
                 child = cls.create_child(*parents)
